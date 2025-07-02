@@ -1,0 +1,27 @@
+name: "faster_rcnn"
+platform: "onnxruntime_onnx"
+max_batch_size: 8  # 0 means batching disabled; use >0 if batching
+
+input [
+  {
+    name: "input"
+    data_type: TYPE_FP32
+    format: FORMAT_NCHW
+    dims: [3, -1, -1]  
+    # Note: In Triton, the first dim (batch) is *excluded* from 'dims' if max_batch_size >0
+    # Since max_batch_size=0 (no batching), no batch dim in 'dims'
+  }
+]
+
+output [
+  {
+    name: "dets"
+    data_type: TYPE_FP32
+    dims: [-1, -1]
+  },
+  {
+    name: "labels"
+    data_type: TYPE_INT64
+    dims: [-1]
+  }
+]
