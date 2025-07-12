@@ -1,0 +1,8 @@
+model_repository: /workspace/model_repository
+profile_models:
+  - faster_rcnn
+perf_analyzer_flags:
+  shape: input:3,800,800
+  concurrency-range: 1:4
+  measurement-mode: time_windows
+triton_launch_mode: local

@@ -111,10 +111,12 @@ COPY --from=triton /opt/tritonserver /opt/tritonserver
 # Copy libdcgm.so.2 from Triton image
 COPY --from=triton /usr/lib/x86_64-linux-gnu/libdcgm.so.2 /usr/lib/x86_64-linux-gnu/
 
-
 # Add Triton to PATH and LD_LIBRARY_PATH
 ENV PATH="/opt/tritonserver/bin:${PATH}"
 ENV LD_LIBRARY_PATH="/opt/tritonserver/lib:${LD_LIBRARY_PATH}"
+
+
+RUN pip install triton-model-analyzer==1.20.0
 
 RUN apt-get update && apt-get install -y libre2-dev && \
     apt-get update && apt-get install -y libb64-dev
